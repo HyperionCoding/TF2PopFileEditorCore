@@ -11,7 +11,7 @@
 class Block
 {
 public:
-	Block();
+	Block(std::string type);
 
 	static int generate_id();
 	void test_id();
@@ -34,6 +34,7 @@ public:
 	std::vector<KeyValuePair> get_keyvalues(const Keys key);
 	void set_keyvalues(std::vector<KeyValuePair> kvs);
 	bool add_keyvalue(Keys key, std::string value);
+	bool add_keyvalue(KeyValuePair kv);
 	bool remove_keyvalue(KeyValuePair kv);
 
 private:

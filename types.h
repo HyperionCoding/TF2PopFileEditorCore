@@ -9,7 +9,7 @@ enum Keys { StartingCurrency };
 
 struct KeyValuePair{
 	int id;
-	Keys key;
+	std::string key;
 	std::string value;
 };
 

@@ -24,7 +24,7 @@ Block Parser::parse_file(std::string filepath)
 		std::cout << s;
 	}*/
 
-	Block mission;
+	Block mission("Mission");
 	parse_tokens(mission, tokens);
 
 	return mission;
@@ -34,7 +34,9 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 {
 
 	// Parse the rest fuck
-	std::string temp;
+	std::string temp = "";
+	std::vector<std::string> keys_values;
+
 	for(unsigned int i = begin; i<tokens.size(); i++){
 		std::string token = tokens.at(i);
 
@@ -43,14 +45,25 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 			continue;
 		}
 		if(token == "}"){
+			while(keys_values.size() != 0){
+				KeyValuePair kv = {0, keys_values.at(0), keys_values.at(1)};
+				block.add_keyvalue(kv);
+				keys_values.erase(keys_values.begin(), keys_values.begin()+2);
+			}
 			return i;
 		}
-		if(token == "{"){
-			Block children;
 
+		if(token == "{"){
+			keys_values.pop_back();
+			Block children(temp);
+
+			// Recurse and jump to after the children
 			i = parse_tokens(children, tokens, i+1);
 
 			block.add_children(children);
+		}else {
+			keys_values.push_back(token);
+			temp = token;
 		}
 	}
 

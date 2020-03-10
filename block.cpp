@@ -1,9 +1,10 @@
 #include "block.h"
 
 
-Block::Block()
+Block::Block(std::string type)
 {
 	id_ = generate_id();
+	type_ = type;
 	std::cout << "Generated block with ID: " << id_ << std::endl;
 }
 
@@ -52,4 +53,9 @@ bool Block::add_children(Block b)
 	children_.push_back(b);
 
 	return true;
+}
+
+bool Block::add_keyvalue(KeyValuePair kv)
+{
+	keyvalues_.push_back(kv);
 }
