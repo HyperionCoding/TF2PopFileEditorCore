@@ -20,8 +20,7 @@ public:
 	static Parser& getInstance();
 
 	Block parse_file(std::string filepath);
-
-	void parse_text(Block* block, std::string content);
+	int parse_tokens(Block& block, std::vector<std::string> tokens, int begin=0);
 
 	bool is_whitespace(char c);
 	bool is_delimiter(char c);

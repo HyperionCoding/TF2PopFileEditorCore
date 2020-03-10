@@ -7,6 +7,8 @@ int main()
 {
 	Parser& parser = Parser::getInstance();
 
-	parser.parse_file("example.pop");
+	Block block = parser.parse_file("example.pop");
+	block.print();
+
 	return 0;
 }

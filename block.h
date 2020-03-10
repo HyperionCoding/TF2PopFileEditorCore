@@ -27,9 +27,9 @@ public:
 	void set_parent(Block* b);
 
 	std::vector<Block> get_children(const BlockType key);
-	void set_children(std::vector<Block*> bs);
-	bool add_children(Block* b);
-	bool remove_children(Block* b);
+	void set_children(std::vector<Block> bs);
+	bool add_children(Block b);
+	bool remove_children(int id);
 
 	std::vector<KeyValuePair> get_keyvalues(const Keys key);
 	void set_keyvalues(std::vector<KeyValuePair> kvs);
@@ -41,7 +41,7 @@ private:
 	std::string type_ = "";
 	Block* parent_ = nullptr;
 	std::vector<KeyValuePair> keyvalues_;
-	std::vector<Block*> children_;
+	std::vector<Block> children_;
 };
 
 #endif // BLOCK_H

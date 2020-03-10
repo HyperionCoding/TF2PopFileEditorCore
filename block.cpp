@@ -32,8 +32,8 @@ std::string Block::print()
 	}
 
 	// Children
-	for(Block* ch : children_){
-		ss << ch->print();
+	for(Block ch : children_){
+		ss << ch.print();
 	}
 
 	// Close
@@ -47,7 +47,7 @@ void Block::set_type(std::string type)
 	type_ = type;
 }
 
-bool Block::add_children(Block* b)
+bool Block::add_children(Block b)
 {
 	children_.push_back(b);
 
