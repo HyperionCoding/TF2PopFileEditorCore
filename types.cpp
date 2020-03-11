@@ -7,3 +7,10 @@ std::map<std::string, BlockType> BlockTypes = {
 	{"wave", Wave},
 	{"tfbot", TFBot}
 };
+
+static int id = 0;
+int generate_id()
+{
+	id++;
+	return (id-1);
+}

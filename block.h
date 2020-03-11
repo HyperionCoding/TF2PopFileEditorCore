@@ -13,11 +13,8 @@ class Block
 public:
 	Block(std::string type);
 
-	static int generate_id();
-	void test_id();
-
 	Block copy(const Block b);
-	std::string print();
+	std::string print(int depth=0, bool debug=false);
 
 	int get_id();
 
@@ -26,7 +23,7 @@ public:
 	Block get_parent();
 	void set_parent(Block* b);
 
-	std::vector<Block> get_children(const BlockType key);
+	std::vector<Block> get_children();
 	void set_children(std::vector<Block> bs);
 	bool add_children(Block b);
 	bool remove_children(int id);
@@ -36,6 +33,8 @@ public:
 	bool add_keyvalue(Keys key, std::string value);
 	bool add_keyvalue(KeyValuePair kv);
 	bool remove_keyvalue(KeyValuePair kv);
+
+	std::string indent(int count);
 
 private:
 	int id_ = -1;

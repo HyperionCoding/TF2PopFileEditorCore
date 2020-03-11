@@ -46,9 +46,13 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 		}
 		if(token == "}"){
 			while(keys_values.size() != 0){
-				KeyValuePair kv = {0, keys_values.at(0), keys_values.at(1)};
-				block.add_keyvalue(kv);
-				keys_values.erase(keys_values.begin(), keys_values.begin()+2);
+				try {
+					KeyValuePair kv = {generate_id(), keys_values.at(0), keys_values.at(1)};
+					block.add_keyvalue(kv);
+					keys_values.erase(keys_values.begin(), keys_values.begin()+2);
+				} catch (...) {
+					std::cout << "Error" << std::endl;
+				}
 			}
 			return i;
 		}
@@ -107,6 +111,11 @@ std::vector<std::string> Parser::string_to_tokens(std::string str)
 
 		if(*iter != ' ' && *iter != '\t'){
 			temp += *iter;
+
+			if(temp == "//"){
+				tokens.push_back(temp);
+				temp.clear();
+			}
 		}
 		else{
 			if(temp != ""){
@@ -146,7 +155,11 @@ std::vector<std::string> Parser::string_to_tokens(std::string str)
 		}
 
 		if(in_quotes || in_comment){
-			tokens_merged.back() += " " + token;
+			if(tokens_merged.back() == "\""){
+				tokens_merged.back() += token;
+			} else{
+				tokens_merged.back() += " " + token;
+			}
 		} else {
 			tokens_merged.push_back(token);
 		}

@@ -1,5 +1,6 @@
 #ifndef TYPES_H
 #define TYPES_H
+#include <iostream>
 #include <string>
 #include <map>
 
@@ -12,5 +13,7 @@ struct KeyValuePair{
 	std::string key;
 	std::string value;
 };
+
+int generate_id();
 
 #endif // TYPES_H
