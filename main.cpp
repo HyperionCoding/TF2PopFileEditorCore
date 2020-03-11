@@ -22,9 +22,9 @@ int main()
 	Block block = parser.parse_file(filepath);
 
 	std::ofstream writefile(out_path);
-	writefile << block.get_children().at(0).print();
+	writefile << block.print();
 
-	std::cout << block.get_children().at(0).print(0, true) << std::endl;
+	std::cout << block.print(0, true) << std::endl;
 
 	return 0;
 }

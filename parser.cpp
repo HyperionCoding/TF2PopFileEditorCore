@@ -35,7 +35,7 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 
 	// Parse the rest fuck
 	std::string temp = "";
-	std::vector<std::string> keys_values;
+	std::vector<std::string> key_values;
 
 	for(unsigned int i = begin; i<tokens.size(); i++){
 		std::string token = tokens.at(i);
@@ -45,11 +45,11 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 			continue;
 		}
 		if(token == "}"){
-			while(keys_values.size() != 0){
+			while(key_values.size() != 0){
 				try {
-					KeyValuePair kv = {generate_id(), keys_values.at(0), keys_values.at(1)};
+					KeyValuePair kv = {generate_id(), key_values.at(0), key_values.at(1)};
 					block.add_keyvalue(kv);
-					keys_values.erase(keys_values.begin(), keys_values.begin()+2);
+					key_values.erase(key_values.begin(), key_values.begin()+2);
 				} catch (...) {
 					std::cout << "Error" << std::endl;
 				}
@@ -58,7 +58,7 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 		}
 
 		if(token == "{"){
-			keys_values.pop_back();
+			key_values.pop_back();
 			Block children(temp);
 
 			// Recurse and jump to after the children
@@ -66,8 +66,18 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 
 			block.add_children(children);
 		}else {
-			keys_values.push_back(token);
+			key_values.push_back(token);
 			temp = token;
+		}
+	}
+
+	while(key_values.size() != 0){
+		try {
+			KeyValuePair kv = {generate_id(), key_values.at(0), key_values.at(1)};
+			block.add_keyvalue(kv);
+			key_values.erase(key_values.begin(), key_values.begin()+2);
+		} catch (...) {
+			std::cout << "Error" << std::endl;
 		}
 	}
 
