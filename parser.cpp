@@ -36,6 +36,7 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 	// Parse the rest fuck
 	std::string temp = "";
 	std::vector<std::string> key_values;
+	std::string temp_comment = "";
 
 	for(unsigned int i = begin; i<tokens.size(); i++){
 		std::string token = tokens.at(i);
@@ -50,6 +51,8 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 					KeyValuePair kv = {generate_id(), key_values.at(0), key_values.at(1)};
 					block.add_keyvalue(kv);
 					key_values.erase(key_values.begin(), key_values.begin()+2);
+
+					temp_comment = "";
 				} catch (...) {
 					std::cout << "Error" << std::endl;
 				}
@@ -76,6 +79,8 @@ int Parser::parse_tokens(Block& block, std::vector<std::string> tokens, int begi
 			KeyValuePair kv = {generate_id(), key_values.at(0), key_values.at(1)};
 			block.add_keyvalue(kv);
 			key_values.erase(key_values.begin(), key_values.begin()+2);
+
+			temp_comment = "";
 		} catch (...) {
 			std::cout << "Error" << std::endl;
 		}

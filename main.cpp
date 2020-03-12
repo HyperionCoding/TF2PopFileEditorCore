@@ -22,7 +22,7 @@ int main()
 	Block block = parser.parse_file(filepath);
 
 	std::ofstream writefile(out_path);
-	writefile << block.print();
+	writefile << block.print(0, true);
 
 	std::cout << block.print(0, true) << std::endl;
 

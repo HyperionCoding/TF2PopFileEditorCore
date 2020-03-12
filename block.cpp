@@ -13,6 +13,7 @@ std::string Block::print(int depth, bool debug)
 	std::stringstream ss;
 
 	// Header
+	//ss << indent(depth) << comment_<< "\n";
 	if(debug){
 		ss << indent(depth) << type_ << "\t// ID:" << id_ << "\n" << indent(depth) << "{\n";
 	}else{
@@ -21,6 +22,7 @@ std::string Block::print(int depth, bool debug)
 
 	// Keyvalues
 	for(KeyValuePair kv : keyvalues_){
+		//ss << indent(depth) << comment_<< "\n";
 		if(debug){
 			ss << indent(depth+1) << kv.key << " " << kv.value << "\t// ID:" << kv.id << "\n";
 		}else{
