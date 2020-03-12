@@ -159,7 +159,11 @@ std::vector<std::string> Parser::string_to_tokens(std::string str)
 
 		if(!in_quotes){
 			if(token == "//"){
-				tokens_merged.push_back(token);
+				if(in_comment){
+					tokens_merged.back() += token;
+				}else{
+					tokens_merged.push_back(token);
+				}
 				in_comment = true;
 				continue;
 			}
