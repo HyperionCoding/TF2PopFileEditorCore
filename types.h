@@ -12,6 +12,7 @@ struct KeyValuePair{
 	int id;
 	std::string key;
 	std::string value;
+	std::string comment;
 };
 
 int generate_id();

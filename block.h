@@ -42,6 +42,8 @@ private:
 	Block* parent_ = nullptr;
 	std::vector<KeyValuePair> keyvalues_;
 	std::vector<Block> children_;
+
+	std::string comment_ = "";
 };
 
 #endif // BLOCK_H
