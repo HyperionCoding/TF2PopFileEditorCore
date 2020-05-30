@@ -8,7 +8,13 @@ int main()
 	std::string filepath;
 
 	std::cout << "Input filepath: ";
-	std::cin >> filepath;
+	std::getline(std::cin, filepath);
+
+	// Fix filepaths that use backslashes
+	std::replace(filepath.begin(), filepath.end(), '\\', '/');
+	filepath = std::string(
+				*(filepath.begin()) == '\"' ? filepath.begin()+1 : filepath.begin(),
+				*(filepath.end()-1) == '\"' ? filepath.end()-1 : filepath.end());
 
 	std::string out_path = filepath;
 	for(auto iter=out_path.end(); iter != out_path.begin(); iter--){
